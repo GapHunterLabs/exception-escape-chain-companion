@@ -1,0 +1,40 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>dev.gaphunter.exceptionescapechaincompanion</id>
+    <name>Exception-Escape Chain Companion</name>
+    <vendor>Gap Hunter Labs</vendor>
+    <description><![CDATA[
+        <p>Warning on a <code>catch (Exception e)</code> (the broad
+        type, not a narrower specific exception) that silently swallows
+        -- no rethrow, no logging -- a specific CHECKED exception that a
+        call inside its <code>try</code> block can actually throw,
+        directly or transitively through a bounded same-class call
+        chain. A real business exception (e.g.
+        <code>PaymentDeclinedException</code>) caught this way leaves
+        the system in an inconsistent state with no trace to diagnose
+        the real incident.</p>
+        <p>"Exception Catcher" (Marketplace) solves the opposite
+        problem (where is X caught); no plugin found that computes the
+        real escape set through a call chain.</p>
+        <p>Stated honestly: chain depth is bounded to a fixed constant
+        (never unlimited); only follows calls to methods of the SAME
+        class -- a call to another class (a further narrowing from the
+        original design, which also considered same-module calls) or an
+        external library is treated as unknown and cuts the chain
+        there, never inferred.</p>
+        <p>Free. No license nags, no telemetry, no network calls.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <localInspection language="JAVA"
+            groupName="Exception-Escape Chain Companion"
+            displayName="Broad catch silently swallows a real checked exception"
+            enabledByDefault="true"
+            level="WARNING"
+            implementationClass="dev.gaphunter.exceptionescapechaincompanion.inspection.EscapeChainInspection"/>
+        <notificationGroup id="Exception-Escape Chain Companion" displayType="BALLOON"/>
+    </extensions>
+</idea-plugin>
