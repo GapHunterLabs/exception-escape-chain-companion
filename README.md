@@ -6,6 +6,12 @@ specific exception) that silently swallows -- no rethrow, no logging
 actually throw, directly or transitively through a bounded same-class
 call chain.
 
+## Screenshots
+
+![Screenshot 1](docs/screenshots/Screenshot_1.png)
+
+![Screenshot 2](docs/screenshots/Screenshot_2.png)
+
 ## Why it exists
 
 A real business exception (e.g. `PaymentDeclinedException`) caught
