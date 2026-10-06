@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a broad <code>catch (Exception e)</code> that silently swallows (no rethrow, no logging) a specific checked
+exception that the <code>try</code> block can throw, directly or through a bounded chain of calls in the same class.
+<!-- tooltip end -->
+<p>A business exception (for example a payment-declined exception) lost this way leaves the system in an
+inconsistent state with no trace to diagnose it. The call chain is followed to a fixed depth, only within the
+class.</p>
+</body>
+</html>
